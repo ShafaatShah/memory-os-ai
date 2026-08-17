@@ -66,7 +66,7 @@ export default function Conversation({
     async function loadMessages() {
       try {
         const data = await api.conversationMessages(
-          activeConversationId
+          activeConversationId!
         );
 
         const loadedMessages: Message[] = data.map((message) => ({

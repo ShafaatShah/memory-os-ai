@@ -5,7 +5,7 @@ import AppLayout from "@/components/layout/AppLayout";
 import { api } from "@/lib/api";
 
 type Project = {
-  id: string;
+  id: number;
   name: string;
   description: string;
   memories: number;
@@ -56,7 +56,7 @@ export default function ProjectsPage() {
     }
   }
 
-  async function deleteProject(id: string) {
+  async function deleteProject(id: number) {
     try {
       await api.deleteProject(id);
 
