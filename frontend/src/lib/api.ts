@@ -1,5 +1,6 @@
-const API_BASE_URL =
-  "https://vadlibzzespcn7nojtivz3wm6y0fyuxi.lambda-url.eu-north-1.on.aws";
+const API_BASE_URL = process.env.NODE_ENV === "development" 
+  ? "http://127.0.0.1:8000" 
+  : "https://vadlibzzespcn7nojtivz3wm6y0fyuxi.lambda-url.eu-north-1.on.aws";
 
 async function request<T>(
   endpoint: string,
@@ -29,7 +30,7 @@ export const api = {
         value: string;
         confidence: number;
       }[];
-    }>("/api/chat/", {
+    }>("/api/chat", {
       method: "POST",
       body: JSON.stringify({
         conversation_id: conversationId,
@@ -67,7 +68,7 @@ export const api = {
         created_at: string;
         updated_at: string;
       }[]
-    >("/api/projects/"),
+    >("/api/projects"),
 
   createProject: (name: string, description: string) =>
     request<{
@@ -79,7 +80,7 @@ export const api = {
       tags: string[];
       created_at: string;
       updated_at: string;
-    }>("/api/projects/", {
+    }>("/api/projects", {
       method: "POST",
       body: JSON.stringify({
         name,
