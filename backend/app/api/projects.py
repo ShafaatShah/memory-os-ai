@@ -30,6 +30,7 @@ class ProjectMemoryCreate(BaseModel):
     memory_id: int
 
 
+@router.get("")
 @router.get("/")
 async def list_projects():
     db = SessionLocal()
@@ -66,6 +67,7 @@ async def list_projects():
         db.close()
 
 
+@router.post("")
 @router.post("/")
 async def create_new_project(payload: ProjectCreate):
     db = SessionLocal()

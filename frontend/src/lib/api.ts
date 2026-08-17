@@ -7,6 +7,7 @@ async function request<T>(
   options?: RequestInit
 ): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    cache: "no-store", // <--- THIS IS THE MAGIC LINE!
     headers: {
       "Content-Type": "application/json",
       ...(options?.headers || {}),
@@ -20,6 +21,7 @@ async function request<T>(
 
   return response.json();
 }
+
 
 export const api = {
   chat: (conversationId: string, message: string) =>

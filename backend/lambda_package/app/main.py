@@ -1,8 +1,11 @@
-from dotenv import load_dotenv
-
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from mangum import Mangum
 from app.api.chat import router as chat_router
@@ -30,11 +33,18 @@ print("Database tables:", inspector.get_table_names())
 app = FastAPI(
     title="MemoryOS AI API",
     version="1.0.0",
-    description="Backend API for MemoryOS AI"
+    description="Backend API for MemoryOS AI",
+    redirect_slashes=False,
 )
 
 # Allow requests from the Next.js frontend
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Include API routes
 app.include_router(chat_router, prefix="/api/chat", tags=["Chat"])

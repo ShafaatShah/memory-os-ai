@@ -23,6 +23,7 @@ class MemoryUpdate(BaseModel):
 # Get all memories
 # -------------------------
 
+@router.get("")
 @router.get("/")
 async def get_memories():
     memories = []

@@ -33,7 +33,7 @@ class ChatResponse(BaseModel):
     memories: list[MemoryUsed]
 
 
-@router.post("", response_model=ChatResponse)
+@router.post("/", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     try:
         # Generate AI response and save the message
